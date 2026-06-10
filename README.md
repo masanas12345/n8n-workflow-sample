@@ -12,4 +12,8 @@ API Monitoring and Jira Ticket Creation
 Flow:
 Schedule Trigger → API Check → Condition → Jira Ticket
 
-These workflows demonstrate workflow automation, API integration, conditional logic, and notifications using n8n.
+## Workflow Screenshot
+
+![n8n Workflow](n8n-workflow-screenshot.png)
+
+These workflows demonstrate workflow automation, API integration, conditional logic, notifications and screenshot using n8n.
