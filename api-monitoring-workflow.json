@@ -1,0 +1,50 @@
+{
+  "name": "API Failure Alert",
+  "nodes": [
+    {
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://api.company.com/health",
+        "method": "GET"
+      }
+    },
+    {
+      "name": "IF Status Check",
+      "type": "n8n-nodes-base.if",
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.status}}",
+              "operation": "notEqual",
+              "value2": 200
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Jira Ticket",
+      "type": "n8n-nodes-base.jira",
+      "parameters": {
+        "projectKey": "QA",
+        "summary": "API Health Check Failed"
+      }
+    }
+  ]
+}

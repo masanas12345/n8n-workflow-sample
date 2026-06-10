@@ -1,0 +1,40 @@
+{
+  "name": "Lead Capture and Email Notification",
+  "nodes": [
+    {
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "new-lead",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "Set Lead Data",
+      "type": "n8n-nodes-base.set",
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "leadName",
+              "value": "={{$json.name}}"
+            },
+            {
+              "name": "email",
+              "value": "={{$json.email}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "parameters": {
+        "toEmail": "sales@company.com",
+        "subject": "New Lead Received",
+        "text": "A new lead has been submitted."
+      }
+    }
+  ]
+}
